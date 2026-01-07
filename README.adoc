@@ -1,0 +1,98 @@
+= Graplin 🍇
+
+A ridiculously lightweight Go client for pushing metrics to Grafana Cloud using InfluxDB Line Protocol.
+
+== What's this all about?
+
+Ever wanted to push metrics to Grafana Cloud without installing separate components importing half of GitHub? Graplin is your answer. It's a tiny, dependency-free Go client that speaks InfluxDB Line Protocol to Grafana's push endpoint.
+
+Think of it as the minimalist's metric delivery service - no bloat, no fuss, just pure Go goodness.
+
+== Why Graplin?
+
+* **Zero dependencies** - Uses only standard Go packages
+* **Lightweight** - Less than 200 lines of code
+* **Simple API** - Configure once, push forever
+* **Battle-tested** - Handles errors like a champ
+* **Grafana Cloud native** - Works seamlessly with Grafana's push endpoint
+
+== Quick Start
+
+```go
+package main
+
+import (
+    "context"
+    "time"
+    "github.com/tillkuhn/graplin/pkg/graplin"
+)
+
+func main() {
+    // Create a client (configure once)
+    client := graplin.NewClient(
+        graplin.WithHost("https://your-grafana-endpoint.grafana.net"),
+        graplin.WithAuth("your-user:your-token"),
+        graplin.WithDebug(true), // Optional: see what's happening
+    )
+
+    // Create a measurement
+    measurement := graplin.Measurement{
+        Measurement: "coffee_consumed",
+        Tags: map[string]string{
+            "user":   "alice",
+            "type":   "espresso",
+        },
+        Fields: map[string]interface{}{
+            "cups":    3,
+            "happiness": 0.95,
+        },
+        Timestamp: time.Now(),
+    }
+
+    // Push it to Grafana Cloud
+    err := client.Push(context.Background(), measurement)
+    if err != nil {
+        panic(err)
+    }
+}
+```
+
+== Configuration Options
+
+* `WithHost(host string)` - Set your Grafana Cloud endpoint
+* `WithAuth(auth string)` - Set credentials (format: "user:token")
+* `WithDebug(debug bool)` - Enable debug logging
+* `WithTimeout(timeout time.Duration)` - Set custom HTTP timeout
+
+== What's in a Measurement?
+
+A `Measurement` is just a fancy name for your metric data:
+
+* **Measurement** - The name of your metric (required)
+* **Tags** - Key-value pairs for filtering and grouping (optional)
+* **Fields** - The actual values you're measuring (at least one required)
+* **Timestamp** - When this measurement happened (optional, uses current time if not set)
+
+== The Line Protocol Magic
+
+Under the hood, Graplin converts your measurements to InfluxDB Line Protocol format:
+
+```
+coffee_consumed,user=alice,type=espresso cups=3i,happiness=0.95 1704067200000000000
+```
+
+But don't worry about the format - Graplin handles all the nitty-gritty details for you.
+
+== Requirements
+
+* Go 1.24 or later
+* A Grafana Cloud account with push endpoint access
+* That's it. Seriously.
+
+== License
+
+Apache 2.0
+
+== Contributing
+
+Found a bug? Want to make Graplin even lighter? Open an issue or send a PR. Just remember - keep it simple and dependency-free!
