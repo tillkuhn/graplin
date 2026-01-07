@@ -1,0 +1,15 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Force update in pkg.go.dev
+        run: |
+          echo "Force update of https://pkg.go.dev/github.com/$GITHUB_REPOSITORY with new tag ${{ github.head_ref || github.ref_name }}"
+          curl -isS https://sum.golang.org/lookup/github.com/$GITHUB_REPOSITORY@${{ github.head_ref || github.ref_name }}
