@@ -83,6 +83,30 @@ coffee_consumed,user=alice,type=espresso cups=3i,happiness=0.95 1704067200000000
 
 But don't worry about the format - Graplin handles all the nitty-gritty details for you.
 
+== Development
+
+Want to hack on Graplin? Here are the essential commands:
+
+```bash
+# Show all available targets
+make help
+
+# Build the binary
+make build
+
+# Run the development workflow (format, vet, test)
+make dev
+
+# Run tests with coverage
+make test-coverage
+
+# Run a single test
+go test -v ./pkg/graplin -run TestMeasurement_String
+
+# Run linter (requires golangci-lint)
+make lint
+```
+
 == Requirements
 
 * Go 1.24 or later
