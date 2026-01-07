@@ -83,6 +83,22 @@ coffee_consumed,user=alice,type=espresso cups=3i,happiness=0.95 1704067200000000
 
 But don't worry about the format - Graplin handles all the nitty-gritty details for you.
 
+== Example
+
+Check out the `examples/` directory for a complete working example that demonstrates how to:
+
+* Create a Graplin client with configuration
+* Generate random coffee consumption data
+* Push metrics every 15 seconds
+* Handle graceful shutdown with Ctrl+C
+
+```bash
+cd examples
+go run .
+```
+
+The example will continuously push random coffee data (1-5 cups, 0-10 happiness score) to your Grafana Cloud endpoint until you interrupt it.
+
 == Development
 
 Want to hack on Graplin? Here are the essential commands:
