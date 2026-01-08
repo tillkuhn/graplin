@@ -38,7 +38,7 @@ func TestMeasurement_String(t *testing.T) {
 				"location=us-midwest",
 				"sensor=temp-m01",
 				"temperature=82.300000",
-				"humidity=71i",
+				"humidity=71",
 				"condition=\"sunny\"",
 				"alert=false",
 				"1736164800000000000",
@@ -70,8 +70,8 @@ func TestMeasurement_String(t *testing.T) {
 			},
 			contains: []string{
 				"memory,host=server01",
-				"free=1024i",
-				"used=2048i",
+				"free=1024",
+				"used=2048",
 			},
 		},
 		{
@@ -89,12 +89,12 @@ func TestMeasurement_String(t *testing.T) {
 			},
 			contains: []string{
 				"counters",
-				"int_field=42i",
-				"int32_field=32i",
-				"int64_field=64i",
-				"uint_field=10u",
-				"uint32=32u",
-				"uint64=64u",
+				"int_field=42",
+				"int32_field=32",
+				"int64_field=64",
+				"uint_field=10",
+				"uint32=32",
+				"uint64=64",
 			},
 		},
 		{

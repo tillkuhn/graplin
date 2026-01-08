@@ -71,10 +71,10 @@ func (m *Measurement) formatFieldValue(key string, value interface{}) string {
 	switch v := value.(type) {
 	case string:
 		return fmt.Sprintf("%s=\"%s\"", key, v)
-	case int, int32, int64:
-		return fmt.Sprintf("%s=%di", key, v)
-	case uint, uint32, uint64:
-		return fmt.Sprintf("%s=%du", key, v)
+	case int, int32, int64, uint, uint32, uint64:
+		return fmt.Sprintf("%s=%d", key, v)
+	// case uint, uint32, uint64:
+	//	return fmt.Sprintf("%s=%du", key, v)
 	case float32, float64:
 		return fmt.Sprintf("%s=%f", key, v)
 	case bool:
