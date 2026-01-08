@@ -1,6 +1,7 @@
-= Graplin 🍇
+= 🍇 Graplin
 
-A ridiculously lightweight Go client for pushing metrics to Grafana Cloud using InfluxDB Line Protocol.
+A ridiculously lightweight Go client for pushing metrics to Grafana Cloud using https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/[InfluxDB Line Protocol] over the public
+https://grafana.com/docs/grafana-cloud/send-data/metrics/metrics-influxdb/push-from-telegraf/#pushing-from-applications-directly%5BPush[HTTP Ingestion Endpoint].
 
 == What's this all about?
 
@@ -18,7 +19,8 @@ Think of it as the minimalist's metric delivery service - no bloat, no fuss, jus
 
 == Quick Start
 
-```go
+[source,go]
+----
 package main
 
 import (
@@ -55,7 +57,7 @@ func main() {
         panic(err)
     }
 }
-```
+----
 
 == Configuration Options
 
@@ -128,6 +130,14 @@ make lint
 * Go 1.24 or later
 * A Grafana Cloud account with push endpoint access
 * That's it. Seriously.
+
+Alternatively, you can push metrics directly using curl:
+----
+curl -iX POST https://prometheus-prod-<no>-<region>.grafana.net/api/v1/push/influx/write \
+  -u "<cloud-instance-i>:<token>" \
+  -H "Content-Type: text/plain"   \
+  -d 'heating_metric,room=kitchen,source=grafana_cloud_docs temperature=42.0'
+----
 
 == License
 
