@@ -5,7 +5,7 @@ https://grafana.com/docs/grafana-cloud/send-data/metrics/metrics-influxdb/push-f
 
 == What's this all about?
 
-Ever wanted to push metrics to Grafana Cloud without installing separate components importing half of GitHub? Graplin is your answer. It's a tiny, dependency-free Go client that speaks InfluxDB Line Protocol to Grafana's push endpoint.
+Ever wanted to push metrics to Grafana Cloud without installing separate components or importing half of GitHub? Graplin is your answer. It's a tiny, dependency-free Go client that speaks InfluxDB Line Protocol to Grafana's push endpoint.
 
 Think of it as the minimalist's metric delivery service - no bloat, no fuss, just pure Go goodness.
 
